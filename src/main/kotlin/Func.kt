@@ -19,14 +19,13 @@ fun printDot (Map:MutableMap<String,Dot>){//вывод имеющихся точ
 }
 fun printTri (Map:MutableMap<String,Trigon>){//вывод имеющихся теугольников из словаря
     if (Map.size !=0){
-        println("Есть такие точки:")
+        println("Есть такие треугольники:")
         for (i in Map.keys){
-            print("${i} ")
+            println("${i} (${Map[i]!!.Dot1.x};${Map[i]!!.Dot1.y}) (${Map[i]!!.Dot2.x};${Map[i]!!.Dot2.y}) (${Map[i]!!.Dot3.x};${Map[i]!!.Dot3.y}) ")
         }
-        println()
     }
     else{
-        println("Точек нет")
+        println("Треугольников нет")
     }
 }
 fun maxLengt (vararg dots:Dot):Double{

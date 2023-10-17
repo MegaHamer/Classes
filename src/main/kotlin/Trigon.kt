@@ -30,5 +30,44 @@ class Trigon (var Dot1:Dot, var  Dot2:Dot, var Dot3:Dot){
         val TriS = this.Square
         return TriS1+TriS2+TriS3<TriS+Tochnost && TriS1+TriS2+TriS3>TriS-Tochnost
     }
-
+    val outCirle =Dot(outCircleX(),outCircleY());
+    val inCircle =Dot(inCircleX(),inCircleY());
+    private fun outCircleX():Double{
+        val mid1 = Dot(Dot1.x+(Dot2.x-Dot1.x)/2,Dot1.y+(Dot2.y-Dot1.y)/2)
+        val mid2 = Dot(Dot1.x+(Dot3.x-Dot1.x)/2,Dot1.y+(Dot3.y-Dot1.y)/2)
+        val k1 = -1/Dot1.k(Dot2)
+        val k2 = -1/Dot1.k(Dot3)
+        val b1 = Dot(0,mid1.y-k1*mid1.x)
+        val b2 = Dot(0,mid2.y-k2*mid2.x)
+        return xFind(mid1,b1,mid2,b2)
+    }
+    private fun outCircleY():Double{
+        val mid1 = Dot(Dot1.x+(Dot2.x-Dot1.x)/2,Dot1.y+(Dot2.y-Dot1.y)/2)
+        val k1 = -1/Dot1.k(Dot2)
+        val b1 = Dot(0,mid1.y-k1*mid1.x)
+        return yFind(outCircleX(),mid1,b1)
+    }
+    private  fun inCircleX():Double{
+        val k1 = Dot1.k(Dot2)
+        val k2 = Dot1.k(Dot3)
+        val k3 = Dot2.k(Dot3)
+        val kBis1 = k1+(k2-k1)/2
+        val kBis2 = k2+(k3-k2)/2
+        val b1 = Dot(0,Dot1.y-kBis1*Dot1.x)
+        val b2 = Dot(0,Dot3.y-kBis2*Dot3.x)
+        return xFind(Dot1,b1,Dot3,b2)
+    }
+    private fun inCircleY():Double{
+        val k1 = Dot1.k(Dot2)
+        val k2 = Dot1.k(Dot3)
+        val kBis1 = k1+(k2-k1)/2
+        val b1 = Dot(0,Dot1.y-kBis1*Dot1.x)
+        return yFind(inCircleX(),Dot1,b1)
+    }
+    private fun xFind(d1: Dot,d2: Dot,d3: Dot,d4: Dot):Double{
+        return (d1.x*(d2.y-d1.y)/(d2.x-d1.x) - d3.x*(d4.y-d3.y)/(d4.x-d3.x) + d3.y -d1.y )/( (d2.y-d1.y)/(d2.x-d1.x) - (d4.y-d3.y)/(d4.x-d3.x) )
+    }
+    private fun yFind(x:Double,d1:Dot,d2:Dot):Double{
+        return (x-d1.x)/(d2.x-d1.x)*(d2.y-d1.y)+d1.y
+    }
 }

@@ -7,5 +7,12 @@ class Dot (var x:Double, var y:Double){
     fun lenght (Dot:Dot):Double{
         return sqrt(Math.pow(x-Dot.x,2.toDouble()) + Math.pow(y-Dot.y,2.toDouble()))
     }
-
+    fun k(Dot:Dot):Double{
+        if(this.x!=Dot.x){
+            return (this.y-Dot.y)/(this.x-Dot.x)
+        }
+        else{
+            return 1.0
+        }
+    }
 }

@@ -11,7 +11,7 @@ fun main() {
             "1" -> {
                 //Посмотреть имеющиеся точку или точки на выбор, по умолчанию есть несколько+
                 //Посмотреть на длину между 2 точками+
-                //Узнать самую большую и маленькую длинны между 3 и более точками на выбор+-
+                //Узнать самую большую и маленькую длинны между 3 и более точками на выбор+
                 //Изменить имеющуюся точку или точки на выбор+
                 //Создать новую точку или точки+
                 //Удалить точку или точки на выбор+
@@ -152,16 +152,17 @@ fun main() {
                                 println()
                                 println("Введите точки из списка или в формате '1;2'(более 2)")
                                 println("Для вывода результата самой большой и маленьких длинн между точками введите '='")
-                                //println("Очистить список точек участвующих в вычислении - '*'")
+                                println("Очистить список точек участвующих в вычислении - '*'")
                                 println("Выход - '/'")
                                 val cc = readln().split(" ")
                                 if ('/' in cc.joinToString("").toCharArray()){
                                     break
                                 }
-                                /*if ('*' in cc.joinToString("").toCharArray()){
-                                    println("ddddefe")
-                                    dd=arrayOf()
-                                }*/
+                                if ('*' in cc.joinToString("").toCharArray()){
+                                    println("Точки стерты")
+                                    dd= arrayOf()
+                                    continue
+                                }
                                 if ('=' in cc.joinToString("").toCharArray()){
                                     if (dd.size<3){
                                         println("Недостаточкно точек")
@@ -179,15 +180,38 @@ fun main() {
                                 }
                                 for (i in cc){
                                     if (i in ArrDot.keys){
-                                        dd+=(ArrDot[i]!!)
+                                        var repeat = false
+                                        for (lk in dd){
+                                            if (ArrDot[i]!!.x == lk.x && ArrDot[i]!!.y == lk.y){
+                                                println("Точка (${ArrDot[i]!!.x};${ArrDot[i]!!.y}) уже есть")
+                                                repeat=true
+                                            }
+                                        }
+                                        if (!repeat){
+                                            dd+=(ArrDot[i]!!)
+                                        }
                                     }
                                     else{
                                         if ( haveLetter( listOf(i) ) ){
-                                            println("Точки ${i} нет")
+                                            println("Точки ${i} нет в списке")
                                         }
                                         else{
                                             val cords = i.split(";")
-                                            dd+=( Dot( cords[0].toDouble(),cords[1].toDouble() ) )
+                                            if (cords.size>=2){
+                                                var repeat = false
+                                                for (lk in dd){
+                                                    if (cords[0].toDouble() == lk.x && cords[1].toDouble() == lk.y){
+                                                        println("Точка (${cords[0].toDouble()};${cords[1].toDouble()}) уже есть")
+                                                        repeat=true
+                                                    }
+                                                }
+                                                if (!repeat){
+                                                    dd+=Dot(cords[0].toDouble(),cords[1].toDouble())
+                                                }
+                                            }
+                                            else{
+                                                println("Неверно указаны координаты")
+                                            }
                                         }
                                     }
                                 }
@@ -342,8 +366,8 @@ fun main() {
             }
 
             "2" -> {
-                //Посмотреть имеющиеся треугольники, по умолчанию есть 2
-                //Узнать входит ли точка в треугольник
+                //Посмотреть имеющиеся треугольники, по умолчанию есть 2+
+                //Узнать входит ли точка в треугольник+
                 //Узнать центр описанной окружности
                 //Узнать центр выписанной окружности
                 //Изменить имеющийся треугольник(его координаты) на выбор
@@ -363,8 +387,210 @@ fun main() {
                                 "8 или /.Выход\n"
                     )
                     when (readln()) {
-                        "1" -> {}
-                        "2" -> {}
+                        "1" -> {//Посмотреть имеющиеся треугольники, по умолчанию есть 2
+                            while(true){
+                                println("\n\n./Треугольники/Список треугольников")
+                                if (ArrDot.size !=0){
+                                    println("Есть такие треугольники:")
+                                    for (i in ArrTri.keys){
+                                        print("${i} ")
+                                    }
+                                    println()
+                                }
+                                else{
+                                    println("Треугольников нет")
+                                }
+                                println("Выберите дейстиве:\n1.Посмотреть координаты точек треугольников\n2 или /.Выход")
+                                when(readln()){
+                                    "1"->{
+                                        println("\n\n./Треугольники/Список треугольников/Координаты точек")
+                                        if (ArrTri.size !=0){
+                                            println("Есть такие треугольники:")
+                                            for (i in ArrTri.keys){
+                                                print("${i} ")
+                                            }
+                                            println()
+                                        }
+                                        else{
+                                            println("Точек нет")
+                                            continue
+                                        }
+                                        println("Выберите треугольник(-и) который(-ые) вы хотите посмотреть через пробел \n(или посмотреть все вводом 'Все')")
+                                        val cc = readln().split(" ")
+
+                                        if ("Все" in cc){
+                                            for (j in ArrTri.keys){
+                                                println("Координаты треугольника ${j} (${ArrTri[j]!!.Dot1.x};${ArrTri[j]!!.Dot1.y}) (${ArrTri[j]!!.Dot2.x};${ArrTri[j]!!.Dot2.y}) (${ArrTri[j]!!.Dot3.x};${ArrTri[j]!!.Dot3.y})")
+                                            }
+                                            continue
+                                        }
+                                        else
+                                            for (i in cc){
+                                                if (i in ArrTri.keys){
+                                                    println("Координаты треугольника ${i} (${ArrTri[i]!!.Dot1.x};${ArrTri[i]!!.Dot1.y}) (${ArrTri[i]!!.Dot2.x};${ArrTri[i]!!.Dot2.y}) (${ArrTri[i]!!.Dot3.x};${ArrTri[i]!!.Dot3.y})")
+                                                }
+                                                else{
+                                                    println("Треугольника ${i} не существует")
+                                                }
+                                            }
+                                    }
+                                    "2","/"->{break}
+                                    else-> println("Такого варианта нет")
+                                }
+                            }
+                        }
+                        "2" -> { //Узнать входит ли точка в треугольник
+                            while(true){
+                            println("\n\n./Треугольники/Точка в треугольнике")
+                            printTri(ArrTri)
+                                println("Выберите объект\n1.Треугольник из списка\n2.Треугольник по трем точкам\n3 или /.Выход")
+                                when(readln()){
+                                    "1"->{
+                                        println("\n\n./Треугольники/Точка в треугольнике/Треугольник")
+                                        printTri(ArrTri)
+                                        println("Введите имена треугольников")
+                                        println("Выход - '/'")
+                                        var cc = readln().split(" ")
+                                        if ('/' in cc.joinToString("").toCharArray()){
+                                            break
+                                        }
+                                        for (i in cc){
+                                            println("\n\n")
+                                            if (i in ArrTri.keys){
+                                                if (ArrDot.size !=0){
+                                                    println("Есть такие точки:")
+                                                    for (pppp in ArrDot.keys){
+                                                        println("${pppp} (${ArrDot[pppp]!!.x};${ArrDot[pppp]!!.y})")
+                                                    }
+                                                }
+                                                else{
+                                                    println("Точек нет")
+                                                }
+                                                println("Координаты треугольника ${i} (${ArrTri[i]!!.Dot1.x};${ArrTri[i]!!.Dot1.y}) (${ArrTri[i]!!.Dot2.x};${ArrTri[i]!!.Dot2.y}) (${ArrTri[i]!!.Dot3.x};${ArrTri[i]!!.Dot3.y})")
+                                                println("Введите точки из списка или координаты вида '1;2' через пробел")
+                                                println("Скип - '*'")
+                                                println("Закончить - '/'")
+                                                var ff = readln().split(" ")
+                                                if ('/' in ff.joinToString("").toCharArray()){
+                                                    break
+                                                }
+                                                if ('*' in ff.joinToString("").toCharArray()){
+                                                    continue
+                                                }
+                                                for (j in ff){
+                                                    if (j in ArrDot.keys){
+                                                        print("Точка ${j} (${ArrDot[j]!!.x};${ArrDot[j]!!.x}) ")
+                                                        if (ArrTri[i]!!.DotInTrigon(ArrDot[j]!!)){
+                                                            println("входит в треугольник ${i} (${ArrTri[i]!!.Dot1.x};${ArrTri[i]!!.Dot1.y}) (${ArrTri[i]!!.Dot2.x};${ArrTri[i]!!.Dot2.y}) (${ArrTri[i]!!.Dot3.x};${ArrTri[i]!!.Dot3.y})")
+                                                        }
+                                                        else{
+                                                            println("не входит в треугольник ${i} (${ArrTri[i]!!.Dot1.x};${ArrTri[i]!!.Dot1.y}) (${ArrTri[i]!!.Dot2.x};${ArrTri[i]!!.Dot2.y}) (${ArrTri[i]!!.Dot3.x};${ArrTri[i]!!.Dot3.y})")
+                                                        }
+                                                    }
+                                                    else{
+                                                        if (haveLetter(j.split(";"))){
+                                                            println("Точки ${j} нет")
+                                                            continue
+                                                        }
+                                                        else{
+                                                            var jj = j.split(";")
+                                                            print("Точка (${jj[0]};${jj[1]}) ")
+                                                            if (ArrTri[i]!!.DotInTrigon(Dot(jj[0].toDouble(),jj[1].toDouble()))){
+                                                                println("входит в треугольник ${i} (${ArrTri[i]!!.Dot1.x};${ArrTri[i]!!.Dot1.y}) (${ArrTri[i]!!.Dot2.x};${ArrTri[i]!!.Dot2.y}) (${ArrTri[i]!!.Dot3.x};${ArrTri[i]!!.Dot3.y})")
+                                                            }
+                                                            else{
+                                                                println("не входит в треугольник ${i} (${ArrTri[i]!!.Dot1.x};${ArrTri[i]!!.Dot1.y}) (${ArrTri[i]!!.Dot2.x};${ArrTri[i]!!.Dot2.y}) (${ArrTri[i]!!.Dot3.x};${ArrTri[i]!!.Dot3.y})")
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            else{
+                                                println("Треугольника ${i} нет")
+                                            }
+                                        }
+                                    }
+                                    "2"->{
+                                        while(true){
+                                            println("\n\n./реугольники/Точка в треугольнике/По трем точкам")
+                                            println("Введите координаты точек теругольника вида '1;2' через пробел")
+                                            println("Выход - '/'")
+                                            val cc = readln().split(" ")
+                                            if ('/' in cc.joinToString("").toCharArray()){
+                                                break
+                                            }
+                                            if (!haveLetter(cc)){
+                                                if (cc.size>2){
+                                                    val dot1 = Dot(cc[0].split(";")[0].toDouble(),cc[0].split(";")[1].toDouble())
+                                                    val dot2 = Dot(cc[1].split(";")[0].toDouble(),cc[1].split(";")[1].toDouble())
+                                                    val dot3 = Dot(cc[2].split(";")[0].toDouble(),cc[2].split(";")[1].toDouble())
+                                                    while (true){
+                                                        if (ArrDot.size !=0){
+                                                            println("Есть такие точки:")
+                                                            for (pppp in ArrDot.keys){
+                                                                println("${pppp} (${ArrDot[pppp]!!.x};${ArrDot[pppp]!!.y})")
+                                                            }
+                                                        }
+                                                        else{
+                                                            println("Точек нет")
+                                                        }
+                                                        println("Треугольник с координатами (${dot1.x};${dot1.y}) (${dot2.x};${dot2.y}) (${dot3.x};${dot3.y})")
+                                                        println("Введите точки из списка или коорднаты в формате '1;2' через пробел")
+                                                        println("Выход - '/'")
+                                                        var dots = readln().split(" ")
+                                                        if ('/' in dots.joinToString("").toCharArray()){
+                                                            break
+                                                        }
+                                                        for (i in dots){
+                                                            if (i in ArrDot.keys){
+                                                                print("Точка ${i} (${ArrDot[i]!!.x};${ArrDot[i]!!.x}) ")
+                                                                if (Trigon(dot1,dot2,dot3).DotInTrigon(ArrDot[i]!!)){
+                                                                    println("входит в треугольник (${dot1.x};${dot1.y}) (${dot2.x};${dot2.y}) (${dot3.x};${dot3.y})")
+                                                                }
+                                                                else{
+                                                                    println("не входит в треугольник (${dot1.x};${dot1.y}) (${dot2.x};${dot2.y}) (${dot3.x};${dot3.y})")
+                                                                }
+                                                            }
+                                                            else{
+                                                                if (haveLetter(i.split(";"))){
+                                                                    println("Точки ${i} нет")
+                                                                    continue
+                                                                }
+                                                                else{
+                                                                    var jj = i.split(";")
+                                                                    print("Точка (${jj[0]};${jj[1]}) ")
+                                                                    if (Trigon(dot1,dot2,dot3).DotInTrigon(Dot(jj[0].toDouble(),jj[1].toDouble()))){
+                                                                        println("входит в треугольник (${dot1.x};${dot1.y}) (${dot2.x};${dot2.y}) (${dot3.x};${dot3.y})")
+                                                                    }
+                                                                    else{
+                                                                        println("не входит в треугольник (${dot1.x};${dot1.y}) (${dot2.x};${dot2.y}) (${dot3.x};${dot3.y})")
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+
+                                                }
+                                                else{
+                                                    println("Недостаточно координат")
+                                                }
+                                            }
+                                            else{
+                                                println("Неправильно указаны координаты")
+                                            }
+                                        }
+
+                                    }
+                                    "3","/"->{
+                                        break
+                                    }
+                                    else->{
+                                        println("Неизветный выбор")
+                                    }
+                                }
+                            }
+
+                        }
                         "3" -> {}
                         "4" -> {}
                         "5" -> {}
