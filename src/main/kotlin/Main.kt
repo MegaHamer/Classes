@@ -1,6 +1,8 @@
 import java.lang.Math.pow
 import kotlin.math.sqrt
 fun main() {
+
+
     val ArrDot = mutableMapOf("A" to Dot(2,8),"B" to Dot(5,3),"C" to Dot(10,7),"D" to Dot(-6,3),"E" to Dot(5,1),"F" to Dot(-1,-2))
     val ArrTri:MutableMap<String,Trigon> = mutableMapOf()
     ArrTri+=("ABC" to Trigon(ArrDot["A"]!!, ArrDot["B"]!!, ArrDot["C"]!!))
@@ -368,7 +370,7 @@ fun main() {
             "2" -> {
                 //Посмотреть имеющиеся треугольники, по умолчанию есть 2+
                 //Узнать входит ли точка в треугольник+
-                //Узнать центр описанной окружности
+                //Узнать центр описанной окружности+
                 //Узнать центр выписанной окружности
                 //Изменить имеющийся треугольник(его координаты) на выбор
                 //Добавить треугольник
@@ -591,8 +593,89 @@ fun main() {
                             }
 
                         }
-                        "3" -> {}
-                        "4" -> {}
+                        "3" -> { //Узнать центр описанной окружности
+                            while(true){
+                                println("\n\n./Треугольники/Описанная окружность")
+                                printTri(ArrTri)
+                                println("Введите треугольники, точки описанных окружностей вы хотите узнать")
+                                println("Или введите три координаты треугольника, через пробел")
+                                println("Выход -'/'")
+                                val inter = readln().split(" ")
+                                if('/' in inter.joinToString("").toCharArray()){
+                                    break
+                                }
+                                var contin = 0
+                                for (i in inter){
+                                    if (contin!=0){
+                                        contin--
+                                        continue
+                                    }
+                                    if (i in ArrTri.keys){ //если есть в списке
+                                        println("Точка описывающей окружности в треугольнике ${i} (${ArrTri[i]!!.outCirle.x};${ArrTri[i]!!.outCirle.y})")
+                                    }
+                                    else{ // нет в списке треугольников т.е напрвильно введен треугольник или координаты
+                                        if (haveLetter(inter.slice(inter.indexOf(i)..inter.indexOf(i)))){
+                                            println("Треугольника по имени ${i} нет")
+                                            continue
+                                        }
+                                        if (haveLetter(inter.slice(inter.indexOf(i)..inter.indexOf(i)+2))){
+                                            println("Неверно введены координаты")
+                                            continue
+                                        }
+                                        else{//координаты введены верно
+                                            val cd1 = i.split(";")
+                                            val cd2 = inter[inter.indexOf(i)+1].split(";")
+                                            val cd3 = inter[inter.indexOf(i)+2].split(";")
+                                            val Trig = Trigon(cd1[0].toDouble(),cd1[1].toDouble(),cd2[0].toDouble(),cd2[1].toDouble(),cd3[0].toDouble(),cd3[1].toDouble())
+                                            contin=2 // пропуск 2 следующих координат
+                                            println("Точка описывающей окружности в треугольнике (${Trig.Dot1.x};${Trig.Dot1.y}) (${Trig.Dot2.x};${Trig.Dot2.y}) (${Trig.Dot3.x};${Trig.Dot3.y}) (${Trig.outCirle.x};${Trig.outCirle.y})")
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                        "4" -> { //Узнать центр выписанной окружности
+                            while(true){
+                                println("\n\n./Треугольники/Вписанная окружность")
+                                printTri(ArrTri)
+                                println("Введите треугольники, точки описанных окружностей вы хотите узнать")
+                                println("Или введите три координаты треугольника, через пробел")
+                                println("Выход -'/'")
+                                val inter = readln().split(" ")
+                                if('/' in inter.joinToString("").toCharArray()){
+                                    break
+                                }
+                                var contin = 0
+                                for (i in inter){
+                                    if (contin!=0){
+                                        contin--
+                                        continue
+                                    }
+                                    if (i in ArrTri.keys){ //если есть в списке
+                                        println("Точка Вписанной окружности в треугольнике ${i} (${ArrTri[i]!!.inCircle.x};${ArrTri[i]!!.inCircle.y})")
+                                    }
+                                    else{ // нет в списке треугольников т.е напрвильно введен треугольник или координаты
+                                        if (haveLetter(inter.slice(inter.indexOf(i)..inter.indexOf(i)))){
+                                            println("Треугольника по имени ${i} нет")
+                                            continue
+                                        }
+                                        if (haveLetter(inter.slice(inter.indexOf(i)..inter.indexOf(i)+2))){
+                                            println("Неверно введены координаты")
+                                            continue
+                                        }
+                                        else{//координаты введены верно
+                                            val cd1 = i.split(";")
+                                            val cd2 = inter[inter.indexOf(i)+1].split(";")
+                                            val cd3 = inter[inter.indexOf(i)+2].split(";")
+                                            val Trig = Trigon(cd1[0].toDouble(),cd1[1].toDouble(),cd2[0].toDouble(),cd2[1].toDouble(),cd3[0].toDouble(),cd3[1].toDouble())
+                                            contin=2 // пропуск 2 следующих координат
+                                            println("Точка описывающей окружности в треугольнике (${Trig.Dot1.x};${Trig.Dot1.y}) (${Trig.Dot2.x};${Trig.Dot2.y}) (${Trig.Dot3.x};${Trig.Dot3.y}) (${Trig.inCircle.x};${Trig.inCircle.y})")
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         "5" -> {}
                         "6" -> {}
                         "7" -> {}

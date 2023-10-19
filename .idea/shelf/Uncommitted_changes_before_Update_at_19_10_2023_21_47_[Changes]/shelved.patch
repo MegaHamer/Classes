@@ -1,0 +1,275 @@
+Index: src/test/kotlin/TrigonTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import org.junit.jupiter.api.Assertions.*\r\nimport org.junit.jupiter.api.Test\r\n\r\nclass TrigonTest {\r\n\r\n    @org.junit.jupiter.api.Test\r\n    fun getOutCirleX() {\r\n        val a =Trigon(2,8,5,3,10,7)\r\n        val expected = 6.0\r\n        val actual = a.outCirle.x\r\n        assertEquals(expected,actual,0.1)\r\n    }\r\n    @Test\r\n    fun getOutCirleX1() {\r\n        val a =Trigon(-6,3,5,1,-1,-2)\r\n        val expected = -0.166\r\n        val actual = a.outCirle.x\r\n        assertEquals(expected,actual,0.01)\r\n    }\r\n    @org.junit.jupiter.api.Test\r\n    fun getOutCirleY() {\r\n        val a =Trigon(2,8,5,3,10,7)\r\n        val expected:Double = 7.0\r\n        val actual = a.outCirle.y\r\n        assertEquals(expected,actual,0.1,\"expect ${expected}_return ${actual}\")\r\n    }\r\n\r\n    @org.junit.jupiter.api.Test\r\n    fun getInCircle() {\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/kotlin/TrigonTest.kt b/src/test/kotlin/TrigonTest.kt
+--- a/src/test/kotlin/TrigonTest.kt	
++++ b/src/test/kotlin/TrigonTest.kt	
+@@ -1,5 +1,6 @@
+ import org.junit.jupiter.api.Assertions.*
+ import org.junit.jupiter.api.Test
++import org.junit.jupiter.api.TestClassOrder
+ 
+ class TrigonTest {
+ 
+@@ -10,6 +11,13 @@
+         val actual = a.outCirle.x
+         assertEquals(expected,actual,0.1)
+     }
++    @org.junit.jupiter.api.Test
++    fun getOutCirleY() {
++        val a =Trigon(2,8,5,3,10,7)
++        val expected:Double = 7.0
++        val actual = a.outCirle.y
++        assertEquals(expected,actual,0.1,"expect ${expected}_return ${actual}")
++    }
+     @Test
+     fun getOutCirleX1() {
+         val a =Trigon(-6,3,5,1,-1,-2)
+@@ -17,15 +25,37 @@
+         val actual = a.outCirle.x
+         assertEquals(expected,actual,0.01)
+     }
+-    @org.junit.jupiter.api.Test
+-    fun getOutCirleY() {
+-        val a =Trigon(2,8,5,3,10,7)
+-        val expected:Double = 7.0
++    @Test
++    fun getOutCirleY1() {
++        val a =Trigon(-6,3,-1,-2,5,1)
++        val expected:Double = 3.8333
+         val actual = a.outCirle.y
+-        assertEquals(expected,actual,0.1,"expect ${expected}_return ${actual}")
++        assertEquals(expected,actual,0.001,"expect ${expected}_return ${actual}")
+     }
+-
+     @org.junit.jupiter.api.Test
+     fun getInCircle() {
+     }
++
++}
++class DotTest{
++    @Test
++    fun getKTest(){
++        val dot1 = Dot(0,0)
++        val dot2 = Dot(2,-3)
++        val expected = 0.0
++
++        val actual = dot1.k(dot2)
++
++        assertEquals(expected,actual,0.001)
++    }
++    @Test
++    fun getKTest1(){
++        val dot1 = Dot(1,1)
++        val dot2 = Dot(2,2)
++        val expected = 1.0
++
++        val actual = dot1.k(dot2)
++
++        assertEquals(expected,actual,0.001)
++    }
+ }
+\ No newline at end of file
+Index: src/main/kotlin/Func.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>fun haveLetter(str:List<String>):Boolean{//есть ли буквы в листе\r\n    for (i in ('A'..'Z') + ('a'..'z')+('А'..'Я')+('а'..'я')+'ё'+'Ё')\r\n        if (i in str.toString()){\r\n            return true\r\n        }\r\n    return false\r\n}\r\nfun printDot (Map:MutableMap<String,Dot>){//вывод имеющихся точек из словаря\r\n    if (Map.size !=0){\r\n        println(\"Есть такие точки:\")\r\n        for (i in Map.keys){\r\n            print(\"${i} \")\r\n        }\r\n        println()\r\n    }\r\n    else{\r\n        println(\"Точек нет\")\r\n    }\r\n}\r\nfun printTri (Map:MutableMap<String,Trigon>){//вывод имеющихся теугольников из словаря\r\n    if (Map.size !=0){\r\n        println(\"Есть такие треугольники:\")\r\n        for (i in Map.keys){\r\n            println(\"${i} (${Map[i]!!.Dot1.x};${Map[i]!!.Dot1.y}) (${Map[i]!!.Dot2.x};${Map[i]!!.Dot2.y}) (${Map[i]!!.Dot3.x};${Map[i]!!.Dot3.y}) \")\r\n        }\r\n    }\r\n    else{\r\n        println(\"Треугольников нет\")\r\n    }\r\n}\r\nfun maxLengt (vararg dots:Dot):Double{\r\n    var max:Double = 0.0\r\n    if(dots.size<2){\r\n        println(\"Количество точек меньше 3\")\r\n        return 0.0\r\n    }\r\n    else\r\n    {\r\n        for (i in dots){\r\n            for (j in dots){\r\n                if (i != j && max < i.lenght(j) ){\r\n                    max = i.lenght(j)\r\n                }\r\n            }\r\n        }\r\n    }\r\n    return max\r\n}\r\nfun minLengt (vararg dots:Dot):Double{\r\n    if(dots.size<2){\r\n        println(\"Количество точек меньше 3\")\r\n        return 0.0\r\n    }\r\n    else\r\n    {\r\n        var min:Double = dots[0].lenght(dots[1])\r\n        for (i in dots){\r\n            for (j in dots){\r\n                if (i != j && min > i.lenght(j) ){\r\n                    min = i.lenght(j)\r\n                }\r\n            }\r\n        }\r\n        return min\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/kotlin/Func.kt b/src/main/kotlin/Func.kt
+--- a/src/main/kotlin/Func.kt	
++++ b/src/main/kotlin/Func.kt	
+@@ -1,6 +1,7 @@
+-fun haveLetter(str:List<String>):Boolean{//есть ли буквы в листе
++fun haveLetter(str:List<String>,diap:Int=str.size):Boolean{//есть ли буквы в листе
++    val strwrap:List<String> = str.slice(0..diap-1)
+     for (i in ('A'..'Z') + ('a'..'z')+('А'..'Я')+('а'..'я')+'ё'+'Ё')
+-        if (i in str.toString()){
++        if (i in strwrap.toString()){
+             return true
+         }
+     return false
+Index: src/main/kotlin/Trigon.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import kotlin.math.sqrt\r\n\r\nclass Trigon (var Dot1:Dot, var  Dot2:Dot, var Dot3:Dot){\r\n    constructor(x1:Double,y1:Double,x2:Double,y2:Double,x3:Double,y3:Double):this(Dot(x1,y1),Dot(x2,y2),Dot(x3,y3)){}\r\n    constructor(x1:Int,y1:Int,x2:Int,y2:Int,x3:Int,y3:Int):this(x1.toDouble(),y1.toDouble(),x2.toDouble(),y2.toDouble(),x3.toDouble(),y3.toDouble()){}\r\n    constructor(Dot1:Dot,x2:Double,y2:Double,x3:Double,y3:Double):this(Dot1.x,Dot1.y,x2,y2,x3,y3){}\r\n    constructor(Dot1:Dot,x2:Int,y2:Int,x3:Int,y3:Int):this(Dot1.x.toDouble(),Dot1.y.toDouble(),x2.toDouble(),y2.toDouble(),x3.toDouble(),y3.toDouble()){}\r\n    constructor(x1:Double,y1:Double,Dot2: Dot,x3:Double,y3:Double):this(x1,y1,Dot2.x,Dot2.y,x3,y3){}\r\n    constructor(x1:Int,y1:Int,Dot2: Dot,x3:Int,y3:Int):this(x1.toDouble(),y1.toDouble(),Dot2.x.toDouble(),Dot2.y.toDouble(),x3.toDouble(),y3.toDouble()){}\r\n    constructor(x1:Double,y1:Double,x2:Double,y2:Double,Dot3: Dot):this(x1,y1,x2,y2,Dot3.x,Dot3.y){}\r\n    constructor(x1:Int,y1:Int,x2:Int,y2:Int,Dot3: Dot):this(x1.toDouble(),y1.toDouble(),x2.toDouble(),y2.toDouble(),Dot3.x.toDouble(),Dot3.y.toDouble()){}\r\n    constructor(Dot1:Dot,Dot2: Dot,x3:Double,y3:Double):this(Dot1.x,Dot1.y,Dot2.x,Dot2.y,x3,y3){}\r\n    constructor(Dot1:Dot,Dot2: Dot,x3:Int,y3:Int):this(Dot1.x.toDouble(),Dot1.y.toDouble(),Dot2.x.toDouble(),Dot2.y.toDouble(),x3.toDouble(),y3.toDouble()){}\r\n    constructor(x1:Double,y1:Double,Dot2: Dot,Dot3: Dot):this(x1,y1,Dot2.x,Dot2.y,Dot3.x,Dot3.y){}\r\n    constructor(x1:Int,y1:Int,Dot2: Dot,Dot3: Dot):this(x1.toDouble(),y1.toDouble(),Dot2.x.toDouble(),Dot2.y.toDouble(),Dot3.x.toDouble(),Dot3.y.toDouble()){}\r\n    constructor(Dot1:Dot,x2:Double,y2:Double,Dot3: Dot):this(Dot1.x,Dot1.y,x2,y2,Dot3.x,Dot3.y){}\r\n    constructor(Dot1:Dot,x2:Int,y2:Int,Dot3: Dot):this(Dot1.x.toDouble(),Dot1.y.toDouble(),x2.toDouble(),y2.toDouble(),Dot3.x.toDouble(),Dot3.y.toDouble()){}\r\n    val Square = this.Square1()\r\n    private fun Square1 ():Double{\r\n        val len1 = Dot1.lenght(Dot2)\r\n        val len2 = Dot2.lenght(Dot3)\r\n        val len3 = Dot3.lenght(Dot1)\r\n        val p:Double = (len1+len2+len3)/2\r\n        return sqrt(p*(p-len1)*(p-len2)*(p-len3))\r\n    }\r\n    fun DotInTrigon (Dot:Dot,Tochnost:Double=0.000001):Boolean{\r\n        val TriS1 = Trigon(Dot,Dot2,Dot3).Square\r\n        val TriS2 = Trigon(Dot1,Dot,Dot3).Square\r\n        val TriS3 = Trigon(Dot1,Dot2,Dot).Square\r\n        val TriS = this.Square\r\n        return TriS1+TriS2+TriS3<TriS+Tochnost && TriS1+TriS2+TriS3>TriS-Tochnost\r\n    }\r\n    val outCirle =Dot(outCircleX(),outCircleY());\r\n    val inCircle =Dot(inCircleX(),inCircleY());\r\n    private fun outCircleX():Double{\r\n        val mid1 = Dot(Dot1.x+(Dot2.x-Dot1.x)/2,Dot1.y+(Dot2.y-Dot1.y)/2)\r\n        val mid2 = Dot(Dot1.x+(Dot3.x-Dot1.x)/2,Dot1.y+(Dot3.y-Dot1.y)/2)\r\n        val k1 = -1/Dot1.k(Dot2)\r\n        val k2 = -1/Dot1.k(Dot3)\r\n        val b1 = Dot(0,mid1.y-k1*mid1.x)\r\n        val b2 = Dot(0,mid2.y-k2*mid2.x)\r\n        return xFind(mid1,b1,mid2,b2)\r\n    }\r\n    private fun outCircleY():Double{\r\n        val mid1 = Dot(Dot1.x+(Dot2.x-Dot1.x)/2,Dot1.y+(Dot2.y-Dot1.y)/2)\r\n        val k1 = -1/Dot1.k(Dot2)\r\n        val b1 = Dot(0,mid1.y-k1*mid1.x)\r\n        return yFind(outCircleX(),mid1,b1)\r\n    }\r\n    private  fun inCircleX():Double{\r\n        val k1 = Dot1.k(Dot2)\r\n        val k2 = Dot1.k(Dot3)\r\n        val k3 = Dot2.k(Dot3)\r\n        val kBis1 = k1+(k2-k1)/2\r\n        val kBis2 = k2+(k3-k2)/2\r\n        val b1 = Dot(0,Dot1.y-kBis1*Dot1.x)\r\n        val b2 = Dot(0,Dot3.y-kBis2*Dot3.x)\r\n        return xFind(Dot1,b1,Dot3,b2)\r\n    }\r\n    private fun inCircleY():Double{\r\n        val k1 = Dot1.k(Dot2)\r\n        val k2 = Dot1.k(Dot3)\r\n        val kBis1 = k1+(k2-k1)/2\r\n        val b1 = Dot(0,Dot1.y-kBis1*Dot1.x)\r\n        return yFind(inCircleX(),Dot1,b1)\r\n    }\r\n    private fun xFind(d1: Dot,d2: Dot,d3: Dot,d4: Dot):Double{\r\n        return (d1.x*(d2.y-d1.y)/(d2.x-d1.x) - d3.x*(d4.y-d3.y)/(d4.x-d3.x) + d3.y -d1.y )/( (d2.y-d1.y)/(d2.x-d1.x) - (d4.y-d3.y)/(d4.x-d3.x) )\r\n    }\r\n    private fun yFind(x:Double,d1:Dot,d2:Dot):Double{\r\n        return (x-d1.x)/(d2.x-d1.x)*(d2.y-d1.y)+d1.y\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/kotlin/Trigon.kt b/src/main/kotlin/Trigon.kt
+--- a/src/main/kotlin/Trigon.kt	
++++ b/src/main/kotlin/Trigon.kt	
+@@ -32,22 +32,25 @@
+     }
+     val outCirle =Dot(outCircleX(),outCircleY());
+     val inCircle =Dot(inCircleX(),inCircleY());
+-    private fun outCircleX():Double{
+-        val mid1 = Dot(Dot1.x+(Dot2.x-Dot1.x)/2,Dot1.y+(Dot2.y-Dot1.y)/2)
+-        val mid2 = Dot(Dot1.x+(Dot3.x-Dot1.x)/2,Dot1.y+(Dot3.y-Dot1.y)/2)
+-        val k1 = -1/Dot1.k(Dot2)
+-        val k2 = -1/Dot1.k(Dot3)
++    private fun outCircleX(Dt1:Dot=Dot1,Dt2:Dot=Dot2,Dt3:Dot=Dot3):Double{
++        val mid1 = Dot(Dt1.x+(Dt2.x-Dt1.x)/2,Dt1.y+(Dt2.y-Dt1.y)/2)
++        val mid2 = Dot(Dt1.x+(Dt3.x-Dt1.x)/2,Dt1.y+(Dt3.y-Dt1.y)/2)
++        val k1 = -1/Dt1.k(Dt2)
++        val k2 = -1/Dt1.k(Dt3)
+         val b1 = Dot(0,mid1.y-k1*mid1.x)
+         val b2 = Dot(0,mid2.y-k2*mid2.x)
+         return xFind(mid1,b1,mid2,b2)
+     }
+-    private fun outCircleY():Double{
+-        val mid1 = Dot(Dot1.x+(Dot2.x-Dot1.x)/2,Dot1.y+(Dot2.y-Dot1.y)/2)
+-        val k1 = -1/Dot1.k(Dot2)
++    private fun outCircleY(Dt1:Dot=Dot1,Dt2:Dot=Dot2,Dt3:Dot=Dot3):Double{
++        val mid1 = Dot(Dt1.x+(Dt2.x-Dt1.x)/2,Dt1.y+(Dt2.y-Dt1.y)/2)
++        val k1 = -1/Dt1.k(Dt2)
+         val b1 = Dot(0,mid1.y-k1*mid1.x)
+         return yFind(outCircleX(),mid1,b1)
+     }
+     private  fun inCircleX():Double{
++        //функция для нахождения точки высоты удаленной от другой на n -> треугольник равнобедренный
++        //Точка пересечения высот в равнобедренном треугольнике (outCircle) -> две точки для биссектрисы
++        //Точка пересечения 2 биссектрис -> описанная окружность
+         val k1 = Dot1.k(Dot2)
+         val k2 = Dot1.k(Dot3)
+         val k3 = Dot2.k(Dot3)
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"0876d4f1-0a8a-4ca2-995a-e4a4f4e7a319\" name=\"Changes\" comment=\"Точки сделаны\">\r\n      <change afterPath=\"$PROJECT_DIR$/src/test/kotlin/TrigonTest.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/Classes.iml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Classes.iml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/kotlin/Dot.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/kotlin/Dot.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/kotlin/Func.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/kotlin/Func.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/kotlin/Main.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/kotlin/Main.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/kotlin/Trigon.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/kotlin/Trigon.kt\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Kotlin Class\" />\r\n        <option value=\"Kotlin File\" />\r\n        <option value=\"JUnit5 Test Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n    <option name=\"UPDATE_TYPE\" value=\"REBASE\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 0\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2WQpUIzL8YoDTOoeSm1grHbJLDj\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,\r\n    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,\r\n    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,\r\n    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,\r\n    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;master&quot;,\r\n    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-21&quot;\r\n  },\r\n  &quot;keyToStringList&quot;: {\r\n    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [\r\n      &quot;kotlin&quot;\r\n    ]\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CreateTestDialog.Recents.Supers\">\r\n      <recent name=\"\" />\r\n    </key>\r\n    <key name=\"CreateTestDialog.RecentsKey\">\r\n      <recent name=\"\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"JUnit.TrigonTest (2)\">\r\n    <configuration name=\"TrigonTest (1)\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Classes\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"TrigonTest\" />\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"TrigonTest (2)\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Classes\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"TrigonTest\" />\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"TrigonTest (4)\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Classes\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"TrigonTest\" />\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"TrigonTest (5)\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Classes\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"TrigonTest\" />\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"TrigonTest\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Classes\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"TrigonTest\" />\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"JUnit.TrigonTest (2)\" />\r\n        <item itemvalue=\"JUnit.TrigonTest (1)\" />\r\n        <item itemvalue=\"JUnit.TrigonTest\" />\r\n        <item itemvalue=\"JUnit.TrigonTest (5)\" />\r\n        <item itemvalue=\"JUnit.TrigonTest (4)\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"0876d4f1-0a8a-4ca2-995a-e4a4f4e7a319\" name=\"Changes\" comment=\"\" />\r\n      <created>1696674672834</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1696674672834</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Точки сделаны\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1697496510639</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1697496510640</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Точки сделаны\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Точки сделаны\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <breakpoint enabled=\"true\" type=\"java-exception\">\r\n          <properties class=\"java.lang.NumberFormatException\" package=\"java.lang\" />\r\n          <option name=\"timeStamp\" value=\"2\" />\r\n        </breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n    <watches-manager>\r\n      <configuration name=\"JetRunConfigurationType\">\r\n        <watch expression=\"i\" />\r\n        <watch expression=\"Dot(cords[0].toDouble(),cords[1].toDouble())\" />\r\n      </configuration>\r\n    </watches-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,14 +4,12 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="0876d4f1-0a8a-4ca2-995a-e4a4f4e7a319" name="Changes" comment="Точки сделаны">
+-      <change afterPath="$PROJECT_DIR$/src/test/kotlin/TrigonTest.kt" afterDir="false" />
++    <list default="true" id="0876d4f1-0a8a-4ca2-995a-e4a4f4e7a319" name="Changes" comment="Точки сделаны&#10;Unit-test&#10;Треугольник в процесе">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/Classes.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Classes.iml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Dot.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Dot.kt" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Func.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Func.kt" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Trigon.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Trigon.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/kotlin/TrigonTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/TrigonTest.kt" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -70,59 +68,60 @@
+       <recent name="" />
+     </key>
+   </component>
+-  <component name="RunManager" selected="JUnit.TrigonTest (2)">
+-    <configuration name="TrigonTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++  <component name="RunManager" selected="JUnit.DotTest.getKTest">
++    <configuration name="DotTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+       <module name="Classes" />
+       <option name="PACKAGE_NAME" value="" />
+-      <option name="MAIN_CLASS_NAME" value="TrigonTest" />
++      <option name="MAIN_CLASS_NAME" value="DotTest" />
+       <option name="TEST_OBJECT" value="class" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="TrigonTest (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++    <configuration name="DotTest.getKTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+       <module name="Classes" />
+       <option name="PACKAGE_NAME" value="" />
+-      <option name="MAIN_CLASS_NAME" value="TrigonTest" />
+-      <option name="TEST_OBJECT" value="class" />
++      <option name="MAIN_CLASS_NAME" value="DotTest" />
++      <option name="METHOD_NAME" value="getKTest" />
++      <option name="TEST_OBJECT" value="method" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="TrigonTest (4)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++    <configuration name="DotTest.getKTest1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+       <module name="Classes" />
+       <option name="PACKAGE_NAME" value="" />
+-      <option name="MAIN_CLASS_NAME" value="TrigonTest" />
+-      <option name="TEST_OBJECT" value="class" />
++      <option name="MAIN_CLASS_NAME" value="DotTest" />
++      <option name="METHOD_NAME" value="getKTest1" />
++      <option name="TEST_OBJECT" value="method" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="TrigonTest (5)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++    <configuration name="TrigonTest.getOutCirleY1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+       <module name="Classes" />
+       <option name="PACKAGE_NAME" value="" />
+       <option name="MAIN_CLASS_NAME" value="TrigonTest" />
+-      <option name="TEST_OBJECT" value="class" />
++      <option name="METHOD_NAME" value="getOutCirleY1" />
++      <option name="TEST_OBJECT" value="method" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="TrigonTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++    <configuration name="MainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="MainKt" />
+       <module name="Classes" />
+-      <option name="PACKAGE_NAME" value="" />
+-      <option name="MAIN_CLASS_NAME" value="TrigonTest" />
+-      <option name="TEST_OBJECT" value="class" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="JUnit.TrigonTest (2)" />
+-        <item itemvalue="JUnit.TrigonTest (1)" />
+-        <item itemvalue="JUnit.TrigonTest" />
+-        <item itemvalue="JUnit.TrigonTest (5)" />
+-        <item itemvalue="JUnit.TrigonTest (4)" />
++        <item itemvalue="JUnit.DotTest.getKTest" />
++        <item itemvalue="Kotlin.MainKt" />
++        <item itemvalue="JUnit.TrigonTest.getOutCirleY1" />
++        <item itemvalue="JUnit.DotTest.getKTest1" />
++        <item itemvalue="JUnit.DotTest" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -143,7 +142,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1697496510640</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="Точки сделаны&#10;Unit-test&#10;Треугольник в процесе">
++      <option name="closed" value="true" />
++      <created>1697573548526</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1697573548526</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -159,7 +166,8 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="Точки сделаны" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Точки сделаны" />
++    <MESSAGE value="Точки сделаны&#10;Unit-test&#10;Треугольник в процесе" />
++    <option name="LAST_COMMIT_MESSAGE" value="Точки сделаны&#10;Unit-test&#10;Треугольник в процесе" />
+   </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>

@@ -1,3 +1,4 @@
+import java.lang.Math.pow
 import kotlin.math.sqrt
 
 class Trigon (var Dot1:Dot, var  Dot2:Dot, var Dot3:Dot){
@@ -48,21 +49,65 @@ class Trigon (var Dot1:Dot, var  Dot2:Dot, var Dot3:Dot){
         return yFind(outCircleX(),mid1,b1)
     }
     private  fun inCircleX():Double{
-        val k1 = Dot1.k(Dot2)
-        val k2 = Dot1.k(Dot3)
-        val k3 = Dot2.k(Dot3)
-        val kBis1 = k1+(k2-k1)/2
-        val kBis2 = k2+(k3-k2)/2
-        val b1 = Dot(0,Dot1.y-kBis1*Dot1.x)
-        val b2 = Dot(0,Dot3.y-kBis2*Dot3.x)
-        return xFind(Dot1,b1,Dot3,b2)
+        //Точка на прямой на расстоянии n
+        fun dotOnNRange(d1: Dot,d2: Dot,n:Double=10.0):Dot{
+            val k = d1.k(d2)
+            val gip = sqrt(pow(k,2.0)+1)
+            val b = d1.y-k*d1.x
+            val x:Double
+            if (d1.x<d2.x){
+                x= n/gip+d1.x
+            }
+            else{
+                x= -n/gip+d1.x
+            }
+            val y = k*x+b
+            return Dot(x,y)
+        }
+        fun outCircleDot(Dt1:Dot,Dt2:Dot,Dt3:Dot):Dot{
+            val mid1 = Dot(Dt1.x+(Dt2.x-Dt1.x)/2,Dt1.y+(Dt2.y-Dt1.y)/2)
+            val mid2 = Dot(Dt1.x+(Dt3.x-Dt1.x)/2,Dt1.y+(Dt3.y-Dt1.y)/2)
+            val k1 = -1/Dt1.k(Dt2)
+            val k2 = -1/Dt1.k(Dt3)
+            val b1 = Dot(0,mid1.y-k1*mid1.x)
+            val b2 = Dot(0,mid2.y-k2*mid2.x)
+            val x = xFind(mid1,b1,mid2,b2)
+            val y = yFind(x,mid1,b1)
+            return Dot(x,y)
+        }
+        val bisDotForDot1 = outCircleDot(Dot1,dotOnNRange(Dot1,Dot2),dotOnNRange(Dot1,Dot3))
+        val bisDotForDot2 = outCircleDot(Dot2,dotOnNRange(Dot2,Dot1),dotOnNRange(Dot2,Dot3))
+
+        return xFind(Dot1,bisDotForDot1,Dot2,bisDotForDot2)
     }
     private fun inCircleY():Double{
-        val k1 = Dot1.k(Dot2)
-        val k2 = Dot1.k(Dot3)
-        val kBis1 = k1+(k2-k1)/2
-        val b1 = Dot(0,Dot1.y-kBis1*Dot1.x)
-        return yFind(inCircleX(),Dot1,b1)
+        fun dotOnNRange(d1: Dot,d2: Dot,n:Double=10.0):Dot{
+            val k = d1.k(d2)
+            val gip = sqrt(pow(k,2.0)+1)
+            val b = d1.y-k*d1.x
+            val x:Double
+            if (d1.x<d2.x){
+                x= n/gip+d1.x
+            }
+            else{
+                x= -n/gip+d1.x
+            }
+            val y = k*x+b
+            return Dot(x,y)
+        }
+        fun outCircleDot(Dt1:Dot,Dt2:Dot,Dt3:Dot):Dot{
+            val mid1 = Dot(Dt1.x+(Dt2.x-Dt1.x)/2,Dt1.y+(Dt2.y-Dt1.y)/2)
+            val mid2 = Dot(Dt1.x+(Dt3.x-Dt1.x)/2,Dt1.y+(Dt3.y-Dt1.y)/2)
+            val k1 = -1/Dt1.k(Dt2)
+            val k2 = -1/Dt1.k(Dt3)
+            val b1 = Dot(0,mid1.y-k1*mid1.x)
+            val b2 = Dot(0,mid2.y-k2*mid2.x)
+            val x = xFind(mid1,b1,mid2,b2)
+            val y = yFind(x,mid1,b1)
+            return Dot(x,y)
+        }
+        val bisDotForDot1 = outCircleDot(Dot1,dotOnNRange(Dot1,Dot2),dotOnNRange(Dot1,Dot3))
+        return yFind(inCircleX(),Dot1,bisDotForDot1)
     }
     private fun xFind(d1: Dot,d2: Dot,d3: Dot,d4: Dot):Double{
         return (d1.x*(d2.y-d1.y)/(d2.x-d1.x) - d3.x*(d4.y-d3.y)/(d4.x-d3.x) + d3.y -d1.y )/( (d2.y-d1.y)/(d2.x-d1.x) - (d4.y-d3.y)/(d4.x-d3.x) )
