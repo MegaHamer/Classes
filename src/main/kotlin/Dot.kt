@@ -1,6 +1,6 @@
 import kotlin.math.sqrt
 
-class Dot (var x:Double, var y:Double){
+class Dot (var x:Double=0.0, var y:Double=0.0){
     constructor(x:Int,y:Int):this(x.toDouble(),y.toDouble()){}
     constructor(x: Int,y: Double):this(x.toDouble(),y){}
     constructor(x: Double,y: Int):this(x,y.toDouble()){}
