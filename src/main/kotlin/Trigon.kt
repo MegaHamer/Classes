@@ -33,6 +33,8 @@ class Trigon (var Dot1:Dot, var  Dot2:Dot, var Dot3:Dot){
     }
     val outCirle =Dot(outCircleX(),outCircleY());
     val inCircle =Dot(inCircleX(),inCircleY());
+    val outCircleRadius = outCirle.lenght(Dot1)
+    val inCircleRadius:Double = inCircleRadius();
     private fun outCircleX():Double{
         val mid1 = Dot(Dot1.x+(Dot2.x-Dot1.x)/2,Dot1.y+(Dot2.y-Dot1.y)/2)
         val mid2 = Dot(Dot1.x+(Dot3.x-Dot1.x)/2,Dot1.y+(Dot3.y-Dot1.y)/2)
@@ -121,6 +123,20 @@ class Trigon (var Dot1:Dot, var  Dot2:Dot, var Dot3:Dot){
         val bisDotForDot1 = outCircleDot(Dot1,dotOnNRange(Dot1,Dot2),dotOnNRange(Dot1,Dot3))
         return yFind(inCircleX(),Dot1,bisDotForDot1)
     }
+
+    private fun inCircleRadius():Double{
+        val d = inCircle //точка окр
+        val k = -1/Dot1.k(Dot2)//k высоты до точки окр
+        val b = Dot(0,d.y-k*d.x) // точка на оси ординат
+        if(b.y == d.y){ //если точки на одной плоскости (и возможно одинаковы)
+            b.x += d.y+ 3.0
+        }
+        val tx = xFind(b,d,Dot1,Dot2) // Х точки пересечения прямых
+        val t = Dot(tx,yFind(tx,b,d)) //точка пересечения прямых
+
+        return d.lenght(t)
+    }
+
     private fun xFind(d1: Dot,d2: Dot,d3: Dot,d4: Dot):Double{
         return (d1.x*(d2.y-d1.y)/(d2.x-d1.x) - d3.x*(d4.y-d3.y)/(d4.x-d3.x) + d3.y -d1.y )/( (d2.y-d1.y)/(d2.x-d1.x) - (d4.y-d3.y)/(d4.x-d3.x) )
     }

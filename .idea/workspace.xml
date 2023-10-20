@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0876d4f1-0a8a-4ca2-995a-e4a4f4e7a319" name="Changes" comment="3Unit-test&#10;unit-тесты для вписанной окружности&#10;работающий метод нахождения точки описанной окружности">
+    <list default="true" id="0876d4f1-0a8a-4ca2-995a-e4a4f4e7a319" name="Changes" comment="4unit-тест &#10;исправлены ошибки с бесконечным значением и нахожение точки пересечения высот если одна из них перпендикулярна оси координат">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Dot.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Dot.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Trigon.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Trigon.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/kotlin/TrigonTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/TrigonTest.kt" afterDir="false" />
     </list>
@@ -82,7 +82,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TrigonTest">
+  <component name="RunManager" selected="Kotlin.MainKt">
     <configuration name="DotTest.K_Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Classes" />
       <option name="PACKAGE_NAME" value="" />
@@ -98,16 +98,6 @@
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="TrigonTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TrigonTest.getInCirleY" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Classes" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TrigonTest" />
-      <option name="METHOD_NAME" value="getInCirleY(double,double,double,double,double,double,double)" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -132,13 +122,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MainKt" />
+      <module name="Classes" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Kotlin.MainKt" />
         <item itemvalue="JUnit.TrigonTest" />
         <item itemvalue="JUnit.TrigonTest.getOutCirleY" />
         <item itemvalue="JUnit.TrigonTest.getOutCirleX" />
         <item itemvalue="JUnit.DotTest.K_Test" />
-        <item itemvalue="JUnit.TrigonTest.getInCirleY" />
       </list>
     </recent_temporary>
   </component>
@@ -167,7 +164,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697756728608</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="4unit-тест &#10;исправлены ошибки с бесконечным значением и нахожение точки пересечения высот если одна из них перпендикулярна оси координат">
+      <option name="closed" value="true" />
+      <created>1697821364064</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1697821364064</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,7 +189,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Точки сделаны" />
     <MESSAGE value="3Unit-test&#10;unit-тесты для вписанной окружности&#10;работающий метод нахождения точки описанной окружности" />
-    <option name="LAST_COMMIT_MESSAGE" value="3Unit-test&#10;unit-тесты для вписанной окружности&#10;работающий метод нахождения точки описанной окружности" />
+    <MESSAGE value="4unit-тест &#10;исправлены ошибки с бесконечным значением и нахожение точки пересечения высот если одна из них перпендикулярна оси координат" />
+    <option name="LAST_COMMIT_MESSAGE" value="4unit-тест &#10;исправлены ошибки с бесконечным значением и нахожение точки пересечения высот если одна из них перпендикулярна оси координат" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -197,11 +203,6 @@
           <properties class="java.lang.StackOverflowError" package="java.lang" />
           <option name="timeStamp" value="3" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/Trigon.kt</url>
-          <line>48</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
@@ -211,6 +212,7 @@
       </configuration>
       <configuration name="JUnit">
         <watch expression="xFind(mid1,b1,mid2,b2)" />
+        <watch expression="outCircleX()" />
       </configuration>
     </watches-manager>
   </component>

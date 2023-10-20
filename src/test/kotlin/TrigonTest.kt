@@ -33,7 +33,8 @@ class TrigonTest {
     }
     @ParameterizedTest(name = "[{index}] Trigon({0}, {1}, {2}, {3}, {4}, {5}) expected {6}")
     @CsvSource(
-        "2,8,5,3,10,7,5.4299"
+        "2,8,5,3,10,7,5.4299",
+        "0,0,10,0,0,10,5"
     )
     fun getInCirleX(x1:Double,y1:Double,x2:Double,y2:Double,x3:Double,y3:Double,expected:Double) {
         val a =Trigon(x1,y1,x2,y2,x3,y3)
@@ -43,7 +44,8 @@ class TrigonTest {
     }
     @ParameterizedTest(name = "[{index}] Trigon({0}, {1}, {2}, {3}, {4}, {5}) expected {6}")
     @CsvSource(
-        "2,8,5,3,10,7,5.792"
+        "2,8,5,3,10,7,5.792",
+        "0,0,10,0,0,10,5"
     )
     fun getInCirleY(x1:Double,y1:Double,x2:Double,y2:Double,x3:Double,y3:Double,expected:Double) {
         val a =Trigon(x1,y1,x2,y2,x3,y3)

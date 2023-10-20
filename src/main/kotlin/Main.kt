@@ -611,7 +611,7 @@ fun main() {
                                         continue
                                     }
                                     if (i in ArrTri.keys){ //если есть в списке
-                                        println("Точка описывающей окружности в треугольнике ${i} (${ArrTri[i]!!.outCirle.x};${ArrTri[i]!!.outCirle.y})")
+                                        println("Точка описывающей окружности в треугольнике ${i} (${ArrTri[i]!!.outCirle.x};${ArrTri[i]!!.outCirle.y}) r=${ArrTri[i]!!.outCircleRadius}")
                                     }
                                     else{ // нет в списке треугольников т.е напрвильно введен треугольник или координаты
                                         if (haveLetter(inter.slice(inter.indexOf(i)..inter.indexOf(i)))){
@@ -628,7 +628,7 @@ fun main() {
                                             val cd3 = inter[inter.indexOf(i)+2].split(";")
                                             val Trig = Trigon(cd1[0].toDouble(),cd1[1].toDouble(),cd2[0].toDouble(),cd2[1].toDouble(),cd3[0].toDouble(),cd3[1].toDouble())
                                             contin=2 // пропуск 2 следующих координат
-                                            println("Точка описывающей окружности в треугольнике (${Trig.Dot1.x};${Trig.Dot1.y}) (${Trig.Dot2.x};${Trig.Dot2.y}) (${Trig.Dot3.x};${Trig.Dot3.y}) (${Trig.outCirle.x};${Trig.outCirle.y})")
+                                            println("Точка описывающей окружности в треугольнике (${Trig.Dot1.x};${Trig.Dot1.y}) (${Trig.Dot2.x};${Trig.Dot2.y}) (${Trig.Dot3.x};${Trig.Dot3.y}) (${Trig.outCirle.x};${Trig.outCirle.y}) r=${ArrTri[i]!!.outCircleRadius}")
                                         }
                                     }
                                 }
@@ -639,7 +639,7 @@ fun main() {
                             while(true){
                                 println("\n\n./Треугольники/Вписанная окружность")
                                 printTri(ArrTri)
-                                println("Введите треугольники, точки описанных окружностей вы хотите узнать")
+                                println("Введите треугольники, точки вписанных окружностей вы хотите узнать")
                                 println("Или введите три координаты треугольника, через пробел")
                                 println("Выход -'/'")
                                 val inter = readln().split(" ")
@@ -653,7 +653,7 @@ fun main() {
                                         continue
                                     }
                                     if (i in ArrTri.keys){ //если есть в списке
-                                        println("Точка Вписанной окружности в треугольнике ${i} (${ArrTri[i]!!.inCircle.x};${ArrTri[i]!!.inCircle.y})")
+                                        println("Точка Вписанной окружности в треугольнике ${i} (${ArrTri[i]!!.inCircle.x};${ArrTri[i]!!.inCircle.y}) r=${ArrTri[i]!!.inCircleRadius}")
                                     }
                                     else{ // нет в списке треугольников т.е напрвильно введен треугольник или координаты
                                         if (haveLetter(inter.slice(inter.indexOf(i)..inter.indexOf(i)))){
@@ -670,7 +670,7 @@ fun main() {
                                             val cd3 = inter[inter.indexOf(i)+2].split(";")
                                             val Trig = Trigon(cd1[0].toDouble(),cd1[1].toDouble(),cd2[0].toDouble(),cd2[1].toDouble(),cd3[0].toDouble(),cd3[1].toDouble())
                                             contin=2 // пропуск 2 следующих координат
-                                            println("Точка описывающей окружности в треугольнике (${Trig.Dot1.x};${Trig.Dot1.y}) (${Trig.Dot2.x};${Trig.Dot2.y}) (${Trig.Dot3.x};${Trig.Dot3.y}) (${Trig.inCircle.x};${Trig.inCircle.y})")
+                                            println("Точка описывающей окружности в треугольнике (${Trig.Dot1.x};${Trig.Dot1.y}) (${Trig.Dot2.x};${Trig.Dot2.y}) (${Trig.Dot3.x};${Trig.Dot3.y}) (${Trig.inCircle.x};${Trig.inCircle.y}) r=${ArrTri[i]!!.inCircleRadius}")
                                         }
                                     }
                                 }
