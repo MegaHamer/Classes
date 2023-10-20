@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0876d4f1-0a8a-4ca2-995a-e4a4f4e7a319" name="Changes" comment="Точки сделаны">
+    <list default="true" id="0876d4f1-0a8a-4ca2-995a-e4a4f4e7a319" name="Changes" comment="3Unit-test&#10;unit-тесты для вписанной окружности&#10;работающий метод нахождения точки описанной окружности">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Dot.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Dot.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Trigon.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Trigon.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/kotlin/TrigonTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/TrigonTest.kt" afterDir="false" />
     </list>
@@ -27,6 +27,20 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;MegaHamer&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="e5b3bbb5-dd75-4af0-a667-1f66e6eedc58" />
+        <option name="url" value="https://github.com/MegaHamer/Classes.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -69,21 +83,21 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.TrigonTest">
+    <configuration name="DotTest.K_Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Classes" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="DotTest" />
+      <option name="METHOD_NAME" value="K_Test(double,double,double,double,double)" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TrigonTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Classes" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="TrigonTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TrigonTest.getInCirleX" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Classes" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TrigonTest" />
-      <option name="METHOD_NAME" value="getInCirleX(double,double,double,double,double,double,double)" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -108,7 +122,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TrigonTest.getOutCirleY (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TrigonTest.getOutCirleY" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Classes" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="TrigonTest" />
@@ -121,10 +135,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.TrigonTest" />
-        <item itemvalue="JUnit.TrigonTest.getInCirleY" />
-        <item itemvalue="JUnit.TrigonTest.getInCirleX" />
-        <item itemvalue="JUnit.TrigonTest.getOutCirleY (1)" />
+        <item itemvalue="JUnit.TrigonTest.getOutCirleY" />
         <item itemvalue="JUnit.TrigonTest.getOutCirleX" />
+        <item itemvalue="JUnit.DotTest.K_Test" />
+        <item itemvalue="JUnit.TrigonTest.getInCirleY" />
       </list>
     </recent_temporary>
   </component>
@@ -145,7 +159,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697496510640</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="3Unit-test&#10;unit-тесты для вписанной окружности&#10;работающий метод нахождения точки описанной окружности">
+      <option name="closed" value="true" />
+      <created>1697756728608</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1697756728608</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -161,7 +183,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Точки сделаны" />
-    <option name="LAST_COMMIT_MESSAGE" value="Точки сделаны" />
+    <MESSAGE value="3Unit-test&#10;unit-тесты для вписанной окружности&#10;работающий метод нахождения точки описанной окружности" />
+    <option name="LAST_COMMIT_MESSAGE" value="3Unit-test&#10;unit-тесты для вписанной окружности&#10;работающий метод нахождения точки описанной окружности" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -176,8 +199,8 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/src/main/kotlin/Trigon.kt</url>
-          <line>53</line>
-          <option name="timeStamp" value="6" />
+          <line>48</line>
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -185,6 +208,9 @@
       <configuration name="JetRunConfigurationType">
         <watch expression="i" />
         <watch expression="Dot(cords[0].toDouble(),cords[1].toDouble())" />
+      </configuration>
+      <configuration name="JUnit">
+        <watch expression="xFind(mid1,b1,mid2,b2)" />
       </configuration>
     </watches-manager>
   </component>

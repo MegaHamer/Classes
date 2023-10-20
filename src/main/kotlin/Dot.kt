@@ -9,10 +9,15 @@ class Dot (var x:Double=0.0, var y:Double=0.0){
     }
     fun k(Dot:Dot):Double{
         if(this.x!=Dot.x){
-            return (this.y-Dot.y)/(this.x-Dot.x)
+            if (this.y!=Dot.y){
+                return (this.y-Dot.y)/(this.x-Dot.x)
+            }
+            else{
+                return (5E-300)
+            }
         }
         else{
-            return 1.0
+            return Double.MAX_VALUE
         }
     }
 }

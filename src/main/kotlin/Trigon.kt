@@ -40,13 +40,25 @@ class Trigon (var Dot1:Dot, var  Dot2:Dot, var Dot3:Dot){
         val k2 = -1/Dot1.k(Dot3)
         val b1 = Dot(0,mid1.y-k1*mid1.x)
         val b2 = Dot(0,mid2.y-k2*mid2.x)
+        if(b2.y == mid2.y){
+            b2.x += 3.0
+        }
         return xFind(mid1,b1,mid2,b2)
     }
     private fun outCircleY():Double{
         val mid1 = Dot(Dot1.x+(Dot2.x-Dot1.x)/2,Dot1.y+(Dot2.y-Dot1.y)/2)
-        val k1 = -1/Dot1.k(Dot2)
+        var k1 = -1/Dot1.k(Dot2)
+        if( mid1.x <= outCircleX()+0.1 && mid1.x >= outCircleX() -0.1){
+            mid1.x = Dot1.x+(Dot3.x-Dot1.x)/2
+            mid1.y= Dot1.y+(Dot3.y-Dot1.y)/2
+            k1 = -1/Dot1.k(Dot3)
+        }
         val b1 = Dot(0,mid1.y-k1*mid1.x)
-        return yFind(outCircleX(),mid1,b1)
+        if(b1.y == mid1.y){
+            b1.x += 3.0
+        }
+        val res = yFind(outCircleX(),mid1,b1)
+        return res
     }
     private  fun inCircleX():Double{
         //Точка на прямой на расстоянии n
